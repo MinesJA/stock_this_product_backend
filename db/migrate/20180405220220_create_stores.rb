@@ -14,7 +14,7 @@ class CreateStores < ActiveRecord::Migration[5.1]
       t.string :email
       t.string :twitter_handle
       t.string :facebook_page
-
+      t.integer :producer_id
       t.timestamps
     end
   end
