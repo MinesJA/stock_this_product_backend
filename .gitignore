@@ -15,4 +15,9 @@
 
 .byebug_history
 
+config
+
 db
+
+# Ignore application configuration
+/config/application.yml
