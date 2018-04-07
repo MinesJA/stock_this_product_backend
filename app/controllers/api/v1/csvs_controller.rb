@@ -10,7 +10,7 @@ class Api::V1::CsvsController < ApplicationController
     storesArray.each do |store|
 
       updatedStore = updateLongLat(store)
-      {"name"=>"Gristedes", "address_one"=>"71 South End Ave", "address_two"=>nil, "city"=>"New York", "state"=>"NY", "zipcode"=>"10280", "phone"=>"2122337770", "email"=>"minesja@gmail.com", "lat"=>40.7084778, "long"=>-74.0176848}
+      # {"name"=>"Gristedes", "address_one"=>"71 South End Ave", "address_two"=>nil, "city"=>"New York", "state"=>"NY", "zipcode"=>"10280", "phone"=>"2122337770", "email"=>"minesja@gmail.com", "lat"=>40.7084778, "long"=>-74.0176848}
 
       jerry.stores.create!(updatedStore)
     end
@@ -48,13 +48,13 @@ class Api::V1::CsvsController < ApplicationController
     addressString = createAddressString(object["address_one"], object["city"], object["state"])
 
     json = googleApiContr.fetchGoogleGeo(addressString)
-    lat = json["results"][0]["geometry"]["location"]["lat"]
-    long = json["results"][0]["geometry"]["location"]["lng"]
+    latitude = json["results"][0]["geometry"]["location"]["lat"]
+    longitude = json["results"][0]["geometry"]["location"]["lng"]
 
 
 
-    object["lat"] = lat
-    object["long"] = long
+    object["latitude"] = latitude
+    object["longitude"] = longitude
 
     object
     # returns object updated with lat and long attributes

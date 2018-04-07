@@ -16,6 +16,8 @@ gem 'awesome_print'
 gem 'figaro'
 gem "pry"
 gem 'rest-client'
+gem 'geocoder'
+gem 'haversine'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
