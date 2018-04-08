@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ip: MyString
+  location_data: MyText
+  search_term: MyString
+  radius: 1
+
+two:
+  ip: MyString
+  location_data: MyText
+  search_term: MyString
+  radius: 1

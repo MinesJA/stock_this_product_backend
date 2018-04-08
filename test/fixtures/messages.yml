@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_email: MyString
+  store_email: MyString
+  email_subject: MyText
+  email_body: MyText
+  search_id: 1
+  producer_id: 1
+
+two:
+  customer_email: MyString
+  store_email: MyString
+  email_subject: MyText
+  email_body: MyText
+  search_id: 1
+  producer_id: 1
