@@ -22,20 +22,20 @@ class Api::V1::StoresController < ApplicationController
     searchLong = store_params[:longitude]
     radius = store_params[:radius]
 
-    @nearStores = []
+    @nearWonStores = []
+    @nearProspectStores = []
 
     Store.all.each do |store|
-      storeLat = store.latitude
-      storeLong = store.longitude
-
-      distance = Haversine.distance(searchLat, searchLong, storeLat, storeLong).to_miles
+      distance = Haversine.distance(searchLat, searchLong, store.latitude, store.longitude).to_miles
+      # calculates the distance between a store and the search lat/long
 
       if distance <= radius
-        @nearStores.push(store)
+        store.buys ? @nearWonStores.push(store) : @nearProspectStores.push(store)
+        # sorts stores in range according to whether or not they currently buy
       end
     end
 
-    render json: @nearStores, status: 200
+    @nearWonStores.length > 0 ? (render json: @nearWonStores, status: 200) : (render json: @nearProspectStores, status: 200)
   end
 
 

@@ -3,23 +3,34 @@ require 'csv'
 class Api::V1::CsvsController < ApplicationController
 
   def create
+    # producer = Producer.create(name: "Jerry's Pickles")
+    producer = Producer.find(csv_params[:producer_id])
     filepath = csv_params[:fileName]
-    storesArray = readCSVDoc(filepath)
-    jerry = Producer.create(name: "Jerry's Pickles")
+    buys = csv_params[:buys]
 
-    storesArray.each do |store|
+    if buys
+      storesArray = readCSVDoc(filepath, true)
 
-      updatedStore = updateLongLat(store)
-      # {"name"=>"Gristedes", "address_one"=>"71 South End Ave", "address_two"=>nil, "city"=>"New York", "state"=>"NY", "zipcode"=>"10280", "phone"=>"2122337770", "email"=>"minesja@gmail.com", "lat"=>40.7084778, "long"=>-74.0176848}
+      storesArray.each do |store|
+        updatedStore = updateLongLat(store)
+        producer.stores.create!(updatedStore)
+      end
+    else
+      storesArray = readCSVDoc(filepath, false)
 
-      jerry.stores.create!(updatedStore)
+      storesArray.each do |store|
+        updatedStore = updateLongLat(store)
+        producer.stores.create!(updatedStore)
+      end
     end
+
+
   end
 
 
   private
 
-  def readCSVDoc(file)
+  def readCSVDoc(file, buys)
     array = []
 
     CSV.foreach(file) do |row|
@@ -34,6 +45,7 @@ class Api::V1::CsvsController < ApplicationController
         object["zipcode"] = row[5]
         object["phone"] = row[6].to_i
         object["email"] = row[7]
+        object["buys"] = buys
 
         array.push(object)
       end
@@ -51,8 +63,6 @@ class Api::V1::CsvsController < ApplicationController
     latitude = json["results"][0]["geometry"]["location"]["lat"]
     longitude = json["results"][0]["geometry"]["location"]["lng"]
 
-
-
     object["latitude"] = latitude
     object["longitude"] = longitude
 
@@ -66,10 +76,11 @@ class Api::V1::CsvsController < ApplicationController
 
     addressString = "#{address},+#{city},+#{state}"
     "https://maps.googleapis.com/maps/api/geocode/json?address=#{addressString}&key=#{ENV["google_geo_key"]}"
+    # returns string for google maps api
   end
 
   def csv_params
-    params.require(:csvs).permit(:fileName)
+    params.require(:csvs).permit(:fileName, :buys, :producer_id)
   end
 
 end
