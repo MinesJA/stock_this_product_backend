@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408214857) do
+ActiveRecord::Schema.define(version: 20180409195520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20180408214857) do
     t.text "location_data"
     t.string "search_term"
     t.integer "radius"
-    t.integer "brand_id"
+    t.integer "producer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
