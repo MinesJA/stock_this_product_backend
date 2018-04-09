@@ -5,6 +5,8 @@ class SearchesController < ApplicationController
   
 
 
+
+
   def create
     @producer = Producer.find(search_params[:producer_id])
 
