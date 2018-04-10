@@ -18,6 +18,7 @@ gem "pry"
 gem 'rest-client'
 gem 'geocoder'
 gem 'haversine'
+gem 'jwt'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
