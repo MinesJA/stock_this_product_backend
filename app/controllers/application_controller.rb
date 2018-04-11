@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
   end
 
   def logged_user
-    decode_hash = decode_token
+    decoded_hash = decode_token
     User.find(decoded_hash["user_id"])
   end
 

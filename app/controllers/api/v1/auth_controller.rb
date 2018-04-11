@@ -5,9 +5,8 @@ class Api::V1::AuthController < ApplicationController
     @user = User.find_by(username: auth_params[:username])
 
     if @user && @user.authenticate(auth_params[:password])
-      byebug
       jwt = issue_token({user_id: @user.id})
-      render json: {user: @user, jwt: jwt}
+      render json: {user: UserSerializer.new(@user), jwt: jwt}
     else
       render json: {error: "User not found or password did not match"}
     end

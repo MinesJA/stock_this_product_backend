@@ -3,20 +3,19 @@ require 'csv'
 class Api::V1::CsvsController < ApplicationController
 
   def create
-    # producer = Producer.create(name: "Jerry's Pickles")
-    producer = Producer.find(csv_params[:producer_id])
-    filepath = csv_params[:fileName]
-    buys = csv_params[:buys]
+    csv_text = params["file"].tempfile.read
+    producer = logged_user.producer
+    buys = params["buys"]
 
-    if buys
-      storesArray = readCSVDoc(filepath, true)
+    if buys === "true"
+      storesArray = readCSVDoc(csv_text, true)
 
       storesArray.each do |store|
         updatedStore = updateLongLat(store)
         producer.stores.create!(updatedStore)
       end
     else
-      storesArray = readCSVDoc(filepath, false)
+      storesArray = readCSVDoc(csv_text, false)
 
       storesArray.each do |store|
         updatedStore = updateLongLat(store)
@@ -24,16 +23,17 @@ class Api::V1::CsvsController < ApplicationController
       end
     end
 
-
+    render json: {message: "Successfully updated"}
   end
 
 
   private
 
-  def readCSVDoc(file, buys)
+  def readCSVDoc(text, buys)
     array = []
+    parsedText = CSV.parse(text)
 
-    CSV.foreach(file) do |row|
+    parsedText.each do |row|
       if !(row[0] === "name")
         object = {}
 
@@ -77,10 +77,6 @@ class Api::V1::CsvsController < ApplicationController
     addressString = "#{address},+#{city},+#{state}"
     "https://maps.googleapis.com/maps/api/geocode/json?address=#{addressString}&key=#{ENV["google_geo_key"]}"
     # returns string for google maps api
-  end
-
-  def csv_params
-    params.require(:csvs).permit(:fileName, :buys, :producer_id)
   end
 
 end

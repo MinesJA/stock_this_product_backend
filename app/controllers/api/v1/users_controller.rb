@@ -7,9 +7,8 @@ class Api::V1::UsersController < ApplicationController
     @user = producer.users.new(username: user_params[:username], password: user_params[:password])
 
     if @user.save
-      byebug
       jwt = issue_token({user_id: @user.id})
-      render json: {user: @user, jwt: jwt}
+      render json: {user: UserSerializer.new(@user), jwt: jwt}
     end
   end
 

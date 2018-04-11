@@ -19,6 +19,7 @@ gem 'rest-client'
 gem 'geocoder'
 gem 'haversine'
 gem 'jwt'
+# gem "paperclip", "~> 6.0.0"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'

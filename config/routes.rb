@@ -6,10 +6,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-        resources :csvs, only: [:create]
+        post '/csvs', to: 'csvs#create'
         post '/stores/fetchnear', :to => 'stores#fetchnear'
         post '/signup', to: "users#create"
-        post './login', to: "auth#create"
+        post '/login', to: "auth#create"
         get '/get_user', to: "auth#show"
     end
   end
