@@ -1,27 +1,31 @@
-class SearchesController < ApplicationController
-  has_many :messages
-  belongs_to :producer
-
-  
+class Api::V1::SearchesController < ApplicationController
 
 
 
 
   def create
-    @producer = Producer.find(search_params[:producer_id])
+    producer_id = searches_params[:producer_id]
+    search_term = searches_params[:search_terms]
+    radius = searches_params[:radius]
+    ip = request.remote_ip
 
-    @message = @producer.searches.create!(search_term: search_params[:search_term], radius: search_params[:radius])
+    producer = Producer.find(producer_id)
+    @search = producer.searches.new(searches_params)
 
-    render json: @message, status: 200
+    if @search.save
+      render json: {message: "Logged search #{ip}", id: @search.id},  status: 200
+    else
+      render json: {error: "Search was unable to save."}
+    end
+
   end
-
 
 
 
   private
 
   def searches_params
-    params.require(:searches).permit(:ip, :location_data, :search_term, :radius, :producer_id)
+    params.require(:searches).permit(:ip, :location_data, :search_term, :radius, :producer_id, :latitude, :longitude)
   end
 
 end
