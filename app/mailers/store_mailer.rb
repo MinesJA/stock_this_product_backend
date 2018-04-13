@@ -5,7 +5,7 @@ class StoreMailer < ApplicationMailer
     @message = params[:message]
 
 
-    mail(to: @message.store_email, from: @message.customer_email, subject: @message.email_subject)
+    mail(to: @message.store.email, from: @message.customer_email, subject: @message.email_subject)
   end
 
 

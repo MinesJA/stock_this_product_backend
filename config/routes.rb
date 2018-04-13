@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
         get '/get_user', to: "auth#show"
         get '/producers', to: "producers#index"
+        get '/messages', to: "messages#index"
     end
   end
 end
