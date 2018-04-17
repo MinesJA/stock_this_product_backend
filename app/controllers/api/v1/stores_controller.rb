@@ -5,40 +5,22 @@ class Api::V1::StoresController < ApplicationController
 
 
   def index
-    @stores = Store.all
-    render json: @stores
+
+    producer_id = params[:id]
+    producer = Producer.find(producer_id)
+    producers_stores = Store.all.select {|store| store.producer_id == producer.id}
+
+    @wonStores = producers_stores.select {|store| store.buys }
+    @prospectStores = producers_stores.select {|store| !store.buys }
+
+    render json: {wonStores: @wonStores, prospectStores: @prospectStores}
   end
 
 
   def show
     @store = Store.find(params[:id])
 
-    render json: @store, status: 200
-  end
-
-
-  def fetchnear
-    searchLat = store_params[:latitude]
-    searchLong = store_params[:longitude]
-    radius = store_params[:radius]
-    producer_id = store_params[:producer_id]
-
-    @nearWonStores = []
-    @nearProspectStores = []
-
-    producers_stores = Store.all.select {|store| store.producer_id == producer_id}
-
-    producers_stores.each do |store|
-      distance = Haversine.distance(searchLat, searchLong, store.latitude, store.longitude).to_miles
-      # calculates the distance between a store and the search lat/long
-
-      if distance <= radius
-        store.buys ? @nearWonStores.push(store) : @nearProspectStores.push(store)
-        # sorts stores in range according to whether or not they currently buy
-      end
-    end
-
-    @nearWonStores.length > 0 ? (render json: @nearWonStores, status: 200) : (render json: @nearProspectStores, status: 200)
+    render json: @store
   end
 
 

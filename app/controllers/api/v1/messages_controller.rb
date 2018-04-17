@@ -4,10 +4,8 @@ class Api::V1::MessagesController < ApplicationController
     search = Search.find(messages_params[:search_id])
     @message = Message.new(messages_params)
 
-    byebug
-
     if @message.save!
-      StoreMailer.with(message: @message).customer_message.deliver_now
+      StoreMailer.with(message: @message).customer_message.deliver!
 
       render json: {message: "Sent message"}
     else

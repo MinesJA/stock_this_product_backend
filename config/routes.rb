@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
         post '/csvs', to: 'csvs#create'
-        post '/stores/fetchnear', to: "stores#fetchnear"
+        get '/stores/:id', to: "stores#index"
         post '/signup', to: "users#create"
         post '/login', to: "auth#create"
         post '/searches', to: "searches#create"
@@ -15,7 +15,10 @@ Rails.application.routes.draw do
 
         get '/get_user', to: "auth#show"
         get '/producers', to: "producers#index"
+        # get '/producers/:id/'
         get '/messages', to: "messages#index"
+        get '/searches', to: "searches#index"
+
     end
   end
 end

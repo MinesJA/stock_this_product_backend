@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
 
 
   def create
-    producer = Producer.find_or_create_by(name: user_params[:producer_name])
+    producer = Producer.find(user_params[:producer_id])
 
     @user = producer.users.new(username: user_params[:username], password: user_params[:password])
 
@@ -16,7 +16,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:users).permit(:username, :password, :producer_name)
+    params.require(:users).permit(:username, :password, :producer_id)
   end
 
 

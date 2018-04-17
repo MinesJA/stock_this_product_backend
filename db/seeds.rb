@@ -1,45 +1,32 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
 
 
-# Lower Manhattan Grocery CreateStores
-# Template: Store.new(name: , address_one: , address_two: , city: , state: , zipcode: , lat: , long: , buys: true, phone: , email: , twitter_handle: , facebook_page: , )
+bobsMayo = Producer.create(name: "Bob's Mayo", description: "The best damn may in town. Mmmm mmm, try our delicious Sriracha Mayo or even our Special Sauce Mayo. Put it on a big mac and explode your taste buds.")
+
+carlsPickles = Producer.create(name: "Carl's Pickles", description: "You've never had a pickle like this. We take prid in pickling the best pickles that ever pickled. You gotta check out these pickles. They're the most delicious pickles. Period.")
+
+jerrysCoconuts = Producer.create(name: "Jerry's Coconuts", description: "As Jennifer Lopez once said, 'I only eat Jerry's Coconuts. He's got the best coconuts in the world'. You gotta check out these coconuts. Our coconuts were once featured on an episode of Giligan's Island.")
+
+
+chickenMayo = bobsMayo.products.create(name: "Chicken Flavored Mayo", description: "Chicken Flavored Mayo about sums it up. It's mayo and is flavored with Chicken", price: 8.75, size: "12oz", imagePath: "src/images/products/pickles.png")
+srirachaMayo = bobsMayo.products.create(name: "Sriracha Mayo", description: "Sriracha is delicious. Mayo is delicious. So we put them together. You're welcome, America.", price: 6.25, size: "12oz", imagePath: "src/images/products/pickles.png")
+sardineMayo = bobsMayo.products.create(name: "Sardine Flavored Mayo", description: "Chicken Flavored Mayo about sums it up. It's mayo and is flavored with Chicken", price: 4.25, size: "12oz", imagePath: "src/images/products/pickles.png")
+veggieMayo = bobsMayo.products.create(name: "Veggie Mayo", description: "Healthy, nutritious, full of celery.", price: 9.50, size: "12oz", imagePath: "src/images/products/pickles.png")
+
+spicyPickles = carlsPickles.products.create(name: "Spicy Pickles", description: "Pickles with a kick. They're spicy. But they're still pickles.", price: 4.15, size: "8oz", imagePath: "src/images/products/pickles.png")
+sweetPickles = carlsPickles.products.create(name: "Sweet Pickles", description: "Hmm, tastes like pickle flavored ice cream. So sweet. Sweet sweet pickles.", price: 2.05, size: "10oz", imagePath: "src/images/products/pickles.png")
+savoryPickles = carlsPickles.products.create(name: "Savory Pickles", description: "Not spicy, not sweet, but savory. Savory pickles amiright?", price: 6.15, size: "10oz", imagePath: "src/images/products/pickles.png")
+classicPickles = carlsPickles.products.create(name: "Classic Pickles", description: "Just your standard, classic pickles. Nothing to write home about. Are they good? Of course they're good.", price: 5.75, size: "12oz", imagePath: "src/images/products/pickles.png")
+
+singleCoconut = jerrysCoconuts.products.create(name: "Single Coconut", description: "Just a single coconut. You like coconuts but not that much? Then grab this guy.", price: 2.50, size: "1 coconut", imagePath: "src/images/products/pickles.png")
+bundleCoconuts = jerrysCoconuts.products.create(name: "Bundle of Coconuts", description: "One coconut isn't gonna be enough but you're not an importer. Grab a bundle.", price: 10.00, size: "5 coconuts", imagePath: "src/images/products/pickles.png")
+basketCoconuts = jerrysCoconuts.products.create(name: "Basket of Coconuts", description: "You host a lot and your guests like coconuts. Grab yourself a basket.", price: 18.00, size: "10 coconuts", imagePath: "src/images/products/pickles.png")
+lifeSupplyCoconuts = jerrysCoconuts.products.create(name: "Life Supply of Coconuts", description: "You live for the coconut. You die for the coconut. LIFE SUPPLY MY MAN.", price: 100, size: "Infinite coconuts", imagePath: "src/images/products/pickles.png")
 
 
 
-#
-# csvInt = Api::V1::CsvInterpreterController.new
-#
-# bobsmayo = Producer.create(name: "Bob's Mayo")
-# # New Producer
-# csvFile = "db/csv/StoreData.csv"
-# # File comes in
-#
-# csvArray = csvInt.readCSVDoc(csvFile)
-# # produces array of objects with store db attributes
-#
-# updatedObjects = csvArray.updateLongLat(csvArray)
-# # returns same array of objects as above but with updated lat and long
-#
-#
 
 
 
-# bobsmayo.stores.create(name: "Gristedes", address_one: "71 South End Ave", city: "New York", state: "NY", zipcode: 10280, lat: nil, long: nil, buys: true, phone: 2122337770, email: "minesja@gmail.com")
-# bobsmayo.stores.create(name: "Zeytuna", address_one: "59 Maiden Ln", city: "New York", state: "NY", zipcode: 10038, lat: nil, long: nil, buys: true, phone: 2127422436, email: "minesja@gmail.com")
-# bobsmayo.stores.create(name: "Jubilee Market Place", address_one: "99 John St", city: "New York", state: "NY", zipcode: 10038, lat: nil, long: nil, buys: true, phone: 2122330808, email: "minesja@gmail.com")
-# bobsmayo.stores.create(name: "Whole Foods Market - Greenwich", address_one: "270 Greenwich St", city: "New York", state: "NY", zipcode: 10007, lat: nil, long: nil, buys: true, phone: 2123496555, email: "minesja@gmail.com")
-# bobsmayo.stores.create(name: "Gourmet Garage", address_one: "366 Broadway", city: "New York", state: "NY", zipcode: 10013, lat: nil, long: nil, buys: true, phone: 2125715850, email: "minesja@gmail.com",)
-# bobsmayo.stores.create(name: "New York Mart", address_one: "128 Mott St", city: "New York", state: "NY", zipcode: 10013, lat: nil, long: nil, buys: true, phone: 2126800178, email: "minesja@gmail.com")
+
 #
-# bobsmayo.stores.create(name: "Sun Vin Grocery Store", address_one: "75 Mulberry St", city: "New York", state: "NY", zipcode: 10013, lat: nil, long: nil, buys: true, phone: 2129620382, email: "minesja@gmail.com")
-#
-#
-#
-# # https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
