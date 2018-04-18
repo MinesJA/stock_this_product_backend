@@ -5,17 +5,13 @@ class Api::V1::MessagesController < ApplicationController
     @message = Message.new(messages_params)
 
     if @message.save!
-      StoreMailer.with(message: @message).customer_message.deliver!
-
+      # StoreMailer.with(message: @message).customer_message.deliver!
       render json: {message: "Sent message"}
     else
       render json: {errors: "Could not save message"}
     end
-
-
+    
   end
-
-
 
   private
 

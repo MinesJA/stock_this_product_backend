@@ -24,6 +24,7 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   config.google_api_key = "AIzaSyCTmW_74MYz0V__RmBUjq7UM0jNBYG33dM"
+  config.mailgun_api_key = "d158bf0b06a336127e61626ca23e2e5f"
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
